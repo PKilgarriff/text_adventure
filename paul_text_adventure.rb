@@ -86,7 +86,7 @@ while game_running
       if safe == "full"
         safe = "empty"
         inventory.push("diamonds")
-        puts "You see some diamonds in the safe, pick them up and make your escape."
+        puts "You see some diamonds in the safe, and put them into your pocket."
       else
         puts "You see where the diamonds were, then remember that they are already in your pocket."
       end
@@ -101,7 +101,7 @@ while game_running
       response = gets.chomp.downcase
       case response
       when "day"
-        puts '"That\'s a relief" the man sighs. "You should look at the desk in the study to the east before you leave."'
+        puts '"That\'s a relief" the man sighs. "You should look at the desk in the study to the north before you leave."'
       when "night"
         player_alive, game_running = false
         puts '"Oh dear, it must be a full moon then." the man grunts. "Such a shame, you seemed nice."'
