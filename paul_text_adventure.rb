@@ -1,3 +1,5 @@
+debug = true if ARGV.first == "debug"
+
 # Game Variables
 location_descriptions = {
   'passage': "You are in a scary passage.",
@@ -19,7 +21,7 @@ location = "passage"
 inventory = []
 
 while game_running
-  puts "#{previous_location} #{location}"
+  puts "#{previous_location} #{location}" if debug
   # IMPORTANT to_sym - to coerce the value of location to a symbol you can use to access from the object
   puts location_descriptions[location.to_sym] if location != previous_location
   previous_location = location
