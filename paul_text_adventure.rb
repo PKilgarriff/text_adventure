@@ -5,6 +5,15 @@ debug = false
 safe_combination = rand(1000...10000)
 safe = "full"
 game_running = true
+first_loop = true
+
+introduction_text = [
+  "Welcome to the Text Adventure!",
+  "Move around by typing in one of the compass directions and hitting enter.",
+  "You can also type 'look' to get more information about your current location.",
+  "If you get stuck, type 'help' to read this message again, or 'quit' to exit the game.",
+  "----------------"
+]
 
 locations_hash = {
   'passage': {
@@ -39,15 +48,22 @@ location = "passage"
 inventory = []
 
 while game_running
+  if first_loop
+    puts introduction_text
+    first_loop = false
+  end
   puts "#{previous_location} #{location}" if debug
   # IMPORTANT to_sym - to coerce the value of location to a symbol you can use to access from the object
   puts locations_hash[location.to_sym][:description] if location != previous_location
   previous_location = location
   input = gets.chomp.downcase if location != "outside"
-  if input == "quit"
+  case input
+  when "quit"
     puts "Bye!"
     # break
     exit
+  when 'help'
+    puts introduction_text
   end
 
   if input == "look" && location != "cell"
