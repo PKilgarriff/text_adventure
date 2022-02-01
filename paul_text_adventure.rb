@@ -60,7 +60,8 @@ while game_running
   input = gets.chomp.downcase
   if input == "quit"
     puts "Bye!"
-    break
+    # break
+    exit
   end
 
   case location
@@ -108,7 +109,7 @@ while game_running
   previous_location = location
 end
 
-if inventory.includes?("diamonds")
+if inventory.include?("diamonds")
   puts "You pat the pouch of diamonds in your pocket, excited to spend your treasure."
 else
   puts "You pat your empty pockets, no treasure this time."
