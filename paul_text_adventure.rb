@@ -43,6 +43,7 @@ location_descriptions = {
   'study': "You are in a warm and cosy study."
 }
 
+previous_location = ""
 location = "passage"
 # 4 digit safe combination generated randomly each run 
 safe_combination = rand(1000...10000)
@@ -50,7 +51,7 @@ safe_combination = rand(1000...10000)
 while location != "outside"
   puts location
   # IMPORTANT to_sym - to coerce the value of location to a symbol you can use to access from the object
-  puts location_descriptions[location.to_sym]
+  if location != previous_location do puts location_descriptions[location.to_sym]
   input = gets.chomp.downcase
   if input == "quit"
     puts "Bye!"
