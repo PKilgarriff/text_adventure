@@ -37,18 +37,20 @@
 # puts "You made it out of the dungeon! Safe travels on the way to your next adventure."
 
 location_descriptions = {
-  "passage": "You are in a scary passage.",
-  "cave": "You are in a scary cave.",
-  "hall": "You are standing in a hall with a marble floor.",
-  "study": "You are in a warm and cosy study."
+  'passage': "You are in a scary passage.",
+  'cave': "You are in a scary cave.",
+  'hall': "You are in a hall with a marble floor.",
+  'study': "You are in a warm and cosy study."
 }
 
 location = "passage"
-# 4 digit safe combination generated randonmly each run 
+# 4 digit safe combination generated randomly each run 
 safe_combination = rand(1000...10000)
 
 while location != "outside"
-  puts location_descriptions[location]
+  puts location
+  # IMPORTANT to_sym - to coerce the value of location to a symbol you can use to access from the object
+  puts location_descriptions[location.to_sym]
   input = gets.chomp.downcase
   if input == "quit"
     puts "Bye!"
