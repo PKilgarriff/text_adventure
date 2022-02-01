@@ -1,26 +1,30 @@
 # debug = true if ARGV.first == "debug"
 debug = false
 # Game Variables
-location_descriptions = {
+locations_hash = {
   'passage': {
     description: "You are in a scary passage.",
-    'look': "The walls drip with an unidentifiable ooze, and there appears to be a cave to the north."
+    look: "The walls drip with an unidentifiable ooze, and there appears to be a cave to the north."
   },
   'cave': {
     description: "You are in a scary cave.",
-    'look': "It is brighter in here than in the passage, but not by much. You see a ladder on the north wall."
+    look: "It is brighter in here than in the passage, but not by much. You see a ladder on the north wall."
   },
   'hall': {
-    description: "You are in a hall with a marble floor."
+    description: "You are in a hall with a marble floor.",
+    look: "You see three doors: one each to the north, east, and west."
   },
   'study': {
-    description: "You are in a warm and cosy study."
+    description: "You are in a warm and cosy study.",
+    look: "You see a desk with documents on it, and what appears to be a safe underneath the desk.",
+    look_at_desk: "You see a piece of paper that reads, The combination is #{safe_combination}."
   },
   'outside': {
     description: "You emerge into sunlight, and look out across rolling hills."
   },
   'cell': {
-    description: "You are in a grimy prison cell."
+    description: "You are in a grimy prison cell.",
+    look: 
   }
 }
 # 4 digit safe combination generated randomly each run 
@@ -37,13 +41,17 @@ inventory = []
 while game_running
   puts "#{previous_location} #{location}" if debug
   # IMPORTANT to_sym - to coerce the value of location to a symbol you can use to access from the object
-  puts location_descriptions[location.to_sym][:description] if location != previous_location
+  puts locations_hash[location.to_sym][:description] if location != previous_location
   previous_location = location
   input = gets.chomp.downcase if location != "outside"
   if input == "quit"
     puts "Bye!"
     # break
     exit
+  end
+
+  if input == "look" && location != "cell"
+    puts locations_hash[location.to_sym][:look]
   end
 
   case location
@@ -67,17 +75,13 @@ while game_running
       location = "outside"
     when "west"
       location = "cell"
-    when "look"
-      puts "You see three doors: one each to the north, east, and west."
     end
   when "study"
     case input
     when "south"
       location = "hall"
-    when "look"
-      puts "You see a safe. You see a desk."
     when "look at desk"
-      puts "You see a piece of paper that reads, The combination is #{safe_combination}."
+      puts locations_hash[location.to_sym][:look_at_desk]
     when "enter combination #{safe_combination}"
       if safe == "full"
         safe = "empty"
