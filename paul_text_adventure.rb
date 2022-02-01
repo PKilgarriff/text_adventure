@@ -100,6 +100,7 @@ while game_running
         puts "You see some diamonds in the safe, pick them up and make your escape."
       else
         puts "You see where the diamonds were, then remember that they are already in your pocket."
+      end
     end
   when "outside"
     game_running = false
@@ -111,4 +112,5 @@ if inventory.includes?("diamonds")
 else
   puts "You pat your empty pockets, no treasure this time."
 end
+
 puts "You made it out of the dungeon! Safe travels on the way to your next adventure."
