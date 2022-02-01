@@ -1,0 +1,16 @@
+Slow down - do this first: Combine the elements of the existing text adventure into one full game.
+Add the concept of health so a player can be instantly killed, or just damaged.
+Introduce a degree of randomness into the game so there's not a fixed set of instructions that guarantee success.
+Make enemies instances of a class so that they can be reused/generated
+Randomise the safe combination
+Passage -> Cave -> Hall -> Study -> Hall --> Outside?
+Rooms should be an object as well so they can have generated information instead of hard-coded
+
+class Location
+  def initialize(type)
+    @room_type = type
+  end
+
+  def movement
+  end
+end
