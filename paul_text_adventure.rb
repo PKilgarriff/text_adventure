@@ -69,7 +69,7 @@ while game_running
     # break
     exit
   when 'help'
-    puts introduction_text
+    puts introduction_text[1..4]
   end
 
   if input == "look" && location != "cell"
