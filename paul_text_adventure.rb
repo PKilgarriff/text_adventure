@@ -84,9 +84,9 @@ while game_running
     case input
     when "north"
       location = "study"
-    when "west"
-      location = "outside"
     when "east"
+      location = "outside"
+    when "west"
       location = "cell"
     when "look"
       puts "You see three doors: one each to the north, east, and west."
@@ -108,15 +108,36 @@ while game_running
         puts "You see where the diamonds were, then remember that they are already in your pocket."
       end
     end
+  when "cell"
+    case input
+    when "east"
+      location = "hall"
+    when "look"
+      puts "You see a man shackled to the wall."
+      puts 'The man asks you "Is it day or night outside?"'
+      reponse = gets.chomp.downcase
+      case response
+      when "day"
+        puts '"That\'s a relief" the man sighs. "You should look at the desk in the study to the east before you leave."'
+      when "night"
+        player_alive, game_running = false
+        puts '"Oh dear, it must be a full moon then." the man grunts. "Such a shame, you seemed nice."'
+        puts "You watch in horror as the man's features shift and buckle under his skin."
+        puts "You have just enough time to see him sprout hair and double in size, before the werewolf tears you apart..."
+      end
+    end
   when "outside"
     game_running = false
   end
 end
 
-if inventory.include?("diamonds")
-  puts "You pat the pouch of diamonds in your pocket, excited to spend your treasure."
+if player_alive
+  if inventory.include?("diamonds")
+    puts "You pat the pouch of diamonds in your pocket, excited to spend your treasure."
+  else
+    puts "You pat your empty pockets, no treasure this time."
+  end
+  puts "You made it out of the dungeon! Safe travels on the way to your next adventure."
 else
-  puts "You pat your empty pockets, no treasure this time."
+  puts "You died in the dungeon! Better luck next time."
 end
-
-puts "You made it out of the dungeon! Safe travels on the way to your next adventure."
