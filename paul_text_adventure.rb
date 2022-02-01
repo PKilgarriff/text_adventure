@@ -105,6 +105,7 @@ while game_running
   when "outside"
     game_running = false
   end
+  previous_location = location
 end
 
 if inventory.includes?("diamonds")
