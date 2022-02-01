@@ -22,11 +22,11 @@ introduction_text = [
 
 locations_hash = {
   'passage': {
-    description: "You are in a scary passage.",
+    description: "You are in a dimly-lit passage.",
     look: "The walls drip with an unidentifiable ooze, and there appears to be a cave to the north."
   },
   'cave': {
-    description: "You are in a scary cave.",
+    description: "You are in a draughty cave.",
     look: "It is brighter in here than in the passage, but not by much. You see a ladder on the north wall."
   },
   'hall': {
@@ -58,7 +58,7 @@ while game_running
     puts introduction_text
     first_loop = false
   end
-  puts "#{previous_location} #{location}" if debug == true
+  puts "Previous: #{previous_location} Current: #{location}" if debug == true
   # IMPORTANT to_sym - to coerce the value of location to a symbol you can use to access from the object
   puts locations_hash[location.to_sym][:description] if location != previous_location
   previous_location = location
@@ -99,6 +99,7 @@ while game_running
       location = "cell"
     end
   when "study"
+    puts "Safe combination is #{safe_combination}." if debug
     case input
     when "south"
       location = "hall"
