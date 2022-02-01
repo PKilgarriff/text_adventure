@@ -1,6 +1,11 @@
 # debug = true if ARGV.first == "debug"
 debug = false
 # Game Variables
+# 4 digit safe combination generated randomly each run 
+safe_combination = rand(1000...10000)
+safe = "full"
+game_running = true
+
 locations_hash = {
   'passage': {
     description: "You are in a scary passage.",
@@ -24,13 +29,8 @@ locations_hash = {
   },
   'cell': {
     description: "You are in a grimy prison cell.",
-    look: 
   }
 }
-# 4 digit safe combination generated randomly each run 
-safe_combination = rand(1000...10000)
-safe = "full"
-game_running = true
 
 # Player variables
 player_alive = true
