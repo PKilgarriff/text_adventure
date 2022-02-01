@@ -2,12 +2,26 @@
 debug = false
 # Game Variables
 location_descriptions = {
-  'passage': "You are in a scary passage.",
-  'cave': "You are in a scary cave.",
-  'hall': "You are in a hall with a marble floor.",
-  'study': "You are in a warm and cosy study.",
-  'outside': "You emerge into sunlight, and look out across rolling hills.",
-  'cell': "You are in a grimy prison cell."
+  'passage': {
+    description: "You are in a scary passage.",
+    'look': "The walls drip with an unidentifiable ooze, and there appears to be a cave to the north."
+  },
+  'cave': {
+    description: "You are in a scary cave.",
+    'look': "It is brighter in here than in the passage, but not by much. You see a ladder on the north wall."
+  },
+  'hall': {
+    description: "You are in a hall with a marble floor."
+  },
+  'study': {
+    description: "You are in a warm and cosy study."
+  },
+  'outside': {
+    description: "You emerge into sunlight, and look out across rolling hills."
+  },
+  'cell': {
+    description: "You are in a grimy prison cell."
+  }
 }
 # 4 digit safe combination generated randomly each run 
 safe_combination = rand(1000...10000)
@@ -23,7 +37,7 @@ inventory = []
 while game_running
   puts "#{previous_location} #{location}" if debug
   # IMPORTANT to_sym - to coerce the value of location to a symbol you can use to access from the object
-  puts location_descriptions[location.to_sym] if location != previous_location
+  puts location_descriptions[location.to_sym][:description] if location != previous_location
   previous_location = location
   input = gets.chomp.downcase if location != "outside"
   if input == "quit"
