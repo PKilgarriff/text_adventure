@@ -36,19 +36,24 @@
 # 
 # puts "You made it out of the dungeon! Safe travels on the way to your next adventure."
 
+# Game Variables
 location_descriptions = {
   'passage': "You are in a scary passage.",
   'cave': "You are in a scary cave.",
   'hall': "You are in a hall with a marble floor.",
-  'study': "You are in a warm and cosy study."
+  'study': "You are in a warm and cosy study.",
+  'outside': "You emerge into sunlight, and look out across rolling hills."
 }
-
-previous_location = ""
-location = "passage"
 # 4 digit safe combination generated randomly each run 
 safe_combination = rand(1000...10000)
+game_running = true
 
-while location != "outside"
+# Player variables
+previous_location = ""
+location = "passage"
+inventory = []
+
+while game_running
   # puts location
   # IMPORTANT to_sym - to coerce the value of location to a symbol you can use to access from the object
   puts location_descriptions[location.to_sym] if location != previous_location
@@ -75,8 +80,10 @@ while location != "outside"
     case input
     when "north"
       location = "study"
+    when "west"
+      location = "outside"
     when "look"
-      puts "You see a door."
+      puts "You see two doors, one to the north and one to the west."
     end
   when "study"
     case input
@@ -87,8 +94,21 @@ while location != "outside"
     when "look at desk"
       puts "You see a piece of paper that reads, The combination is #{safe_combination}."
     when "enter combination #{safe_combination}"
-      safe = "open"
-      puts "You see some diamonds in the safe, pick them up and make your escape"
+      if safe == "full"
+        safe = "empty"
+        inventory.push("diamonds")
+        puts "You see some diamonds in the safe, pick them up and make your escape."
+      else
+        puts "You see where the diamonds were, then remember that they are already in your pocket."
     end
+  when "outside"
+    game_running = false
   end
 end
+
+if inventory.includes?("diamonds")
+  puts "You pat the pouch of diamonds in your pocket, excited to spend your treasure."
+else
+  puts "You pat your empty pockets, no treasure this time."
+end
+puts "You made it out of the dungeon! Safe travels on the way to your next adventure."
