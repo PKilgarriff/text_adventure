@@ -31,7 +31,8 @@ locations_hash = {
   'study': {
     description: "You are in a warm and cosy study.",
     look: "You see a desk with documents on it, and what appears to be a safe underneath the desk.",
-    look_at_desk: "You see a piece of paper that reads, The combination is #{safe_combination}."
+    look_at_desk: "You see a piece of paper that reads, The combination is #{safe_combination}.",
+    look_at_safe: "You see a sturdy safe firmly attached to the floor, it looks like it needs a 4 digit combination.",
   },
   'outside': {
     description: "You emerge into sunlight, and look out across rolling hills."
@@ -98,6 +99,8 @@ while game_running
       location = "hall"
     when "look at desk"
       puts locations_hash[location.to_sym][:look_at_desk]
+    when "look at safe"
+      puts locations_hash[location.to_sym][:look_at_safe]
     when "enter combination #{safe_combination}"
       if safe == "full"
         safe = "empty"
