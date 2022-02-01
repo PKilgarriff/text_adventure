@@ -42,10 +42,12 @@ location_descriptions = {
   'cave': "You are in a scary cave.",
   'hall': "You are in a hall with a marble floor.",
   'study': "You are in a warm and cosy study.",
-  'outside': "You emerge into sunlight, and look out across rolling hills."
+  'outside': "You emerge into sunlight, and look out across rolling hills.",
+  'cell': "You are in a grimy prison cell."
 }
 # 4 digit safe combination generated randomly each run 
 safe_combination = rand(1000...10000)
+safe = "full"
 game_running = true
 
 # Player variables
@@ -54,10 +56,11 @@ location = "passage"
 inventory = []
 
 while game_running
-  # puts location
+  puts "#{previous_location} #{location}"
   # IMPORTANT to_sym - to coerce the value of location to a symbol you can use to access from the object
   puts location_descriptions[location.to_sym] if location != previous_location
-  input = gets.chomp.downcase
+  previous_location = location
+  input = gets.chomp.downcase if location != "outside"
   if input == "quit"
     puts "Bye!"
     # break
@@ -83,8 +86,10 @@ while game_running
       location = "study"
     when "west"
       location = "outside"
+    when "east"
+      location = "cell"
     when "look"
-      puts "You see two doors, one to the north and one to the west."
+      puts "You see three doors: one each to the north, east, and west."
     end
   when "study"
     case input
@@ -106,7 +111,6 @@ while game_running
   when "outside"
     game_running = false
   end
-  previous_location = location
 end
 
 if inventory.include?("diamonds")
