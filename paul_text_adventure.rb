@@ -1,5 +1,5 @@
 # debug = true if ARGV.first == "debug"
-
+debug = false
 # Game Variables
 location_descriptions = {
   'passage': "You are in a scary passage.",
