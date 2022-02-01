@@ -1,5 +1,10 @@
-# debug = true if ARGV.first == "debug"
-debug = false
+if ARGV.include? "debug"
+  debug = true
+else
+  debug = false
+end
+ARGV.clear
+
 # Game Variables
 # 4 digit safe combination generated randomly each run 
 safe_combination = rand(1000...10000)
@@ -35,7 +40,7 @@ locations_hash = {
     look_at_safe: "You see a sturdy safe firmly attached to the floor, it looks like it needs a 4 digit combination.",
   },
   'outside': {
-    description: "You emerge into sunlight, and look out across rolling hills."
+    description: "You emerge into sunlight, and look out across rolling hills.",
   },
   'cell': {
     description: "You are in a grimy prison cell.",
@@ -53,7 +58,7 @@ while game_running
     puts introduction_text
     first_loop = false
   end
-  puts "#{previous_location} #{location}" if debug
+  puts "#{previous_location} #{location}" if debug == true
   # IMPORTANT to_sym - to coerce the value of location to a symbol you can use to access from the object
   puts locations_hash[location.to_sym][:description] if location != previous_location
   previous_location = location
