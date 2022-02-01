@@ -27,7 +27,7 @@ locations_hash = {
   },
   'cave': {
     description: "You are in a draughty cave.",
-    look: "It is brighter in here than in the passage, but not by much. You see a ladder on the north wall."
+    look: "It is brighter in here than in the passage, but not by much. You can make out a ladder on the north wall."
   },
   'hall': {
     description: "You are in a hall with a marble floor.",
