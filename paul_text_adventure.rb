@@ -1,4 +1,4 @@
-debug = true if ARGV.first == "debug"
+# debug = true if ARGV.first == "debug"
 
 # Game Variables
 location_descriptions = {
