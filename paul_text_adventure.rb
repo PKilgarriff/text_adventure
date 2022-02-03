@@ -55,7 +55,7 @@ locations_hash = {
   },
   'study': {
     description: "You are in a warm and cosy study.",
-    look: Proc.new { print "You see a desk with documents on it, and what appears to be a safe underneath the desk." },
+    look: Proc.new { puts "You see a desk with documents on it, and what appears to be a safe underneath the desk." },
     look_at_desk: "You see a piece of paper that reads, The combination is #{safe_combination}.",
     look_at_safe: "You see a sturdy safe firmly attached to the floor, it looks like it needs a 4 digit combination.",
     movement: {
