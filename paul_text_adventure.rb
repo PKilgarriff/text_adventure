@@ -134,6 +134,7 @@ while $game_running
 
   if ['north', 'east', 'south', 'west'].any? == input
     location = locations_hash[location.to_sym][:movement][:input.to_sym].()
+    puts "You remain in the #{location}" if location = previous_location
   end
 
   case location
