@@ -55,11 +55,17 @@ while $game_running
     puts locations_hash[location.to_sym][:look].()
   end
 
+<<<<<<< HEAD
   # puts input
   if ['north', 'east', 'south', 'west'].any? { |direction| direction == input }
     # puts locations_hash[location.to_sym][:movement][input.to_sym]
     location = locations_hash[location.to_sym][:movement][input.to_sym]
     puts "You remain in the #{location}" if location == previous_location
+=======
+  if ['north', 'east', 'south', 'west'].any? == input
+    location = locations_hash[location.to_sym][:movement][:input.to_sym]
+    puts "You remain in the #{location}" if location = previous_location
+>>>>>>> parent of 2c536e3 (Pass block to direction check, Fix comaprison (139))
   end
 
   case location
