@@ -5,11 +5,26 @@ else
 end
 ARGV.clear
 
+def cellInteraction
+  puts "You see a man shackled to the wall."
+  puts 'The man asks you "Is it day or night outside?"'
+  response = gets.chomp.downcase
+  case response
+  when "day"
+    puts '"That\'s a relief" the man sighs. "You should look at the desk in the study to the north before you leave."'
+  when "night"
+    $player_alive, $game_running = false
+    puts '"Oh dear, it must be a full moon then." the man grunts. "Such a shame, you seemed nice."'
+    puts "You watch in horror as the man's features shift and buckle under his skin."
+    puts "You have just enough time to see him sprout hair and double in size, before the werewolf tears you apart..."
+  end
+end
+
 # Game Variables
 # 4 digit safe combination generated randomly each run 
 safe_combination = rand(1000...10000)
 safe = "full"
-game_running = true
+$game_running = true
 first_loop = true
 
 introduction_text = [
@@ -23,7 +38,7 @@ introduction_text = [
 locations_hash = {
   'passage': {
     description: "You are in a dimly-lit passage.",
-    look: "The walls drip with an unidentifiable ooze, and there appears to be a cave to the north."
+    look: Proc.new { puts "The walls drip with an unidentifiable ooze, and there appears to be a cave to the north." }
   },
   'cave': {
     description: "You are in a draughty cave.",
@@ -44,16 +59,17 @@ locations_hash = {
   },
   'cell': {
     description: "You are in a grimy prison cell.",
+    look: method(:cellInteraction)
   }
 }
 
 # Player variables
-player_alive = true
+$player_alive = true
 previous_location = ""
 location = "passage"
 inventory = []
 
-while game_running
+while $game_running
   if first_loop
     puts introduction_text
     first_loop = false
@@ -72,8 +88,12 @@ while game_running
     puts introduction_text[1..4]
   end
 
-  if input == "look" && location != "cell"
+  if input == "look" && location != "passage"
     puts locations_hash[location.to_sym][:look]
+  end
+
+  if input == "look"
+    locations_hash[location.to_sym][:look].()
   end
 
   case location
@@ -121,25 +141,14 @@ while game_running
     when "east"
       location = "hall"
     when "look"
-      puts "You see a man shackled to the wall."
-      puts 'The man asks you "Is it day or night outside?"'
-      response = gets.chomp.downcase
-      case response
-      when "day"
-        puts '"That\'s a relief" the man sighs. "You should look at the desk in the study to the north before you leave."'
-      when "night"
-        player_alive, game_running = false
-        puts '"Oh dear, it must be a full moon then." the man grunts. "Such a shame, you seemed nice."'
-        puts "You watch in horror as the man's features shift and buckle under his skin."
-        puts "You have just enough time to see him sprout hair and double in size, before the werewolf tears you apart..."
-      end
+      locations_hash[location.to_sym][:look].()
     end
   when "outside"
-    game_running = false
+    $game_running = false
   end
 end
 
-if player_alive
+if $player_alive
   if inventory.include?("diamonds")
     puts "You pat the pouch of diamonds in your pocket, excited to spend your treasure."
   else
