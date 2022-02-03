@@ -132,33 +132,37 @@ while $game_running
     locations_hash[location.to_sym][:look].()
   end
 
+  if ['north', 'east', 'south', 'west'].any? == input
+    location = locations_hash[location.to_sym][:movement][:input.to_sym].()
+  end
+
   case location
-  when "passage"
-    case input
-    when "north"
-      location = "cave"
-    end
-  when "cave"
-    case input
-    when "north"
-      location = "hall"
-    when "south"
-      location = "passage"
-    end
-  when "hall"
-    case input
-    when "north"
-      location = "study"
-    when "east"
-      location = "outside"
-    when "west"
-      location = "cell"
-    end
+#  when "passage"
+#    case input
+#    when "north"
+#      location = "cave"
+#    end
+#  when "cave"
+#    case input
+#    when "north"
+#      location = "hall"
+#    when "south"
+#      location = "passage"
+#    end
+#  when "hall"
+#    case input
+#    when "north"
+#      location = "study"
+#    when "east"
+#      location = "outside"
+#    when "west"
+#      location = "cell"
+#    end
   when "study"
     puts "Safe combination is #{safe_combination}." if debug
     case input
-    when "south"
-      location = "hall"
+#    when "south"
+#      location = "hall"
     when "look at desk"
       puts locations_hash[location.to_sym][:look_at_desk]
     when "look at safe"
@@ -174,8 +178,8 @@ while $game_running
     end
   when "cell"
     case input
-    when "east"
-      location = "hall"
+#    when "east"
+#      location = "hall"
     when "look"
       locations_hash[location.to_sym][:look].()
     end
