@@ -86,6 +86,28 @@ locations_hash = {
   }
 }
 
+class Safe
+  POSSIBLE_TREASURE = ["a pouch of diamonds", "a bronze spoon", " a handful of coins", "a picture of a horse"]
+ 
+  def initialize(location)
+    @location = location
+    @contents = generate_treasure()
+    @combination = rand(1000...10000)
+  end
+  
+  def is_empty?
+    @contents.empty?
+  end
+
+  def generate_treasure
+    @contents = POSSIBLE_TREASURE.sample(2)
+  end
+
+  def request_safe_combination
+    @combination
+  end
+end
+
 # Player variables
 $player_alive = true
 previous_location = ""
