@@ -87,7 +87,12 @@ locations_hash = {
 }
 
 class Safe
-  POSSIBLE_TREASURE = ["a pouch of diamonds", "a bronze spoon", " a handful of coins", "a picture of a horse"]
+  POSSIBLE_TREASURE = [
+    "a pouch of diamonds",
+    "a bronze spoon",
+    " a handful of coins",
+    "a picture of a horse"
+  ]
  
   def initialize(location)
     @location = location
@@ -131,9 +136,7 @@ while $game_running
     exit
   when 'help'
     puts introduction_text[1..4]
-  end
-
-  if input == "look"
+  when "look"
     locations_hash[location.to_sym][:look].()
   end
 
