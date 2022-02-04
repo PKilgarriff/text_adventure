@@ -56,7 +56,7 @@ locations_hash = {
   'study': {
     description: "You are in a warm and cosy study.",
     look: Proc.new { puts "You see a desk with documents on it, and what appears to be a safe underneath the desk." },
-    look_at_desk: "You see a piece of paper that reads, The combination is #{safe_combination}.",
+    look_at_desk: "You see a piece of paper that reads, The combination is #{study_safe.request_safe_combination}.",
     look_at_safe: "You see a sturdy safe firmly attached to the floor, it looks like it needs a 4 digit combination.",
     movement: {
       north: "study",
@@ -90,12 +90,15 @@ class Safe
   POSSIBLE_TREASURE = [
     "a pouch of diamonds",
     "a bronze spoon",
-    " a handful of coins",
+    "a handful of coins",
     "a picture of a horse"
   ]
- 
+
+  attr_reader :locked
+
   def initialize(location)
     @location = location
+    @locked = true
     @contents = generate_treasure()
     @combination = rand(1000...10000)
   end
@@ -111,7 +114,31 @@ class Safe
   def request_safe_combination
     @combination
   end
+  
+  def safe_information
+    puts "The safe is in the #{@location}"
+    puts "The safe is locked? #{@locked}"
+    puts "The combination is #{@combination}"
+    puts "The safe contains #{@contents}"
+    puts "The safe is empty? #{is_empty?()}"
+  end
+
+  def enter_safe_combination(user_input)
+    if user_input.to_i === @combination
+      @locked = !@locked
+      locked_string = @locked ? "Locked" : "Unlocked"
+      puts "Safe is #{locked_string}"
+    else
+      puts "Incorrect Combination"
+      false
+    end
+  end
 end
+
+study_safe = Safe.new("study")
+# puts "The Safe combination is #{study_safe.request_safe_combination}"
+study_safe.safe_information
+puts study_safe.locked
 
 # Player variables
 $player_alive = true
